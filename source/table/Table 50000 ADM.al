@@ -23,7 +23,7 @@ table 50000 "ADM Nutritional Info"
             begin
                 item.Get(Rec."Item No.");
                 Rec."Item description" := item.Description;
-                rec.Modify();
+                // rec.Modify();
             end;
 
 
