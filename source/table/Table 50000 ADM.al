@@ -31,7 +31,7 @@ table 50000 "ADM Nutritional Info"
 
         field(30; "Item Description 2"; Text[50])
         {
-            // DataClassification = ToBeClassified;
+            //DataClassification = ToBeClassified;
             Caption = 'item Description 2';
             Fieldclass = FlowField;
             CalcFormula = lookup(Item."Description 2" where("No." = field("Item No.")));
@@ -50,6 +50,8 @@ table 50000 "ADM Nutritional Info"
         }
     }
 
+
+
     keys
     {
         key(PK; "Item No.", "Nutritional Type")
@@ -57,5 +59,33 @@ table 50000 "ADM Nutritional Info"
             Clustered = true;
         }
     }
+
+    trigger OnInsert()
+    var
+        Total: Decimal;
+        ADM: Record "ADM Nutritional Info";
+    begin
+        ADM.SetRange("Item No.", Rec."item No.");
+        Total := 0;
+        if ADM.CalcSums(Amount) then
+            Total := Rec.Amount + ADM.Amount;
+        if Total >= 2000 then
+            Error('The sum of the calories is above 2000');
+
+    end;
+
+    trigger OnModify()
+    var
+        Total: Decimal;
+        ADM: Record "ADM Nutritional Info";
+    begin
+        ADM.SetRange("Item No.", Rec."item No.");
+        Total := 0;
+        if ADM.CalcSums(Amount) then
+            Total := Rec.Amount + ADM.Amount;
+        if Total >= 2000 then
+            Error('The sum of the calories is above 2000');
+
+    end;
 
 }

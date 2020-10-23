@@ -95,8 +95,6 @@ pageextension 50000 "ADM PageExt50000" extends "Item Card"
                     end;
 
 
-
-
                 }
 
             }

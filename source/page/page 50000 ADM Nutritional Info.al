@@ -17,29 +17,35 @@ page 50000 "ADM Nutritional Info"
                 field("Item No."; "Item No.")
                 {
                     ApplicationArea = All;
+                    StyleExpr = tmpStyle;
 
                 }
 
                 field("Item Description"; "Item Description")
                 {
                     ApplicationArea = All;
+                    StyleExpr = tmpStyle;
+
 
                 }
 
                 field("Item Description 2"; "Item Description")
                 {
                     ApplicationArea = All;
+                    StyleExpr = tmpStyle;
 
                 }
 
                 field("Nutritional Type"; "Nutritional Type")
                 {
                     ApplicationArea = All;
+                    StyleExpr = tmpStyle;
 
                 }
                 field("Amount"; "Amount")
                 {
                     ApplicationArea = All;
+                    StyleExpr = tmpStyle;
 
                 }
 
@@ -68,4 +74,19 @@ page 50000 "ADM Nutritional Info"
             }
         }
     }
+
+    trigger OnAfterGetRecord()
+    begin
+        if Rec.Amount < 10 then
+            tmpStyle := 'Standard';
+        if (Rec.Amount >= 10) and (Rec.Amount < 100) then
+            tmpStyle := 'Favorable';
+        if Rec.Amount > 100 then
+            tmpStyle := 'Attention';
+
+    end;
+
+    var
+        tmpStyle: Text;
+
 }
