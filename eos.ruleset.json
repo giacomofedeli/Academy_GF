@@ -1,0 +1,17 @@
+{
+    "name": "Eos Ruleset",
+    "description": "Description",
+    "rules": [
+        {
+        "id": "AS0084",
+        "action": "None",
+        "justification": "Sappiamo che e' una custom ma vogliamo utilizzare questo analyzer"
+    },
+    {
+        "id": "AA0215",
+        "action": "None",
+        "justification": "Abbiamo una naming convention diversa"
+    }
+    ]
+    
+}

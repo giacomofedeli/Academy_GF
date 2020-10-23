@@ -4,13 +4,14 @@ pageextension 50000 "ADM PageExt50000" extends "Item Card"
     {
         addlast(content)
         {
-            group(NutritionalInfos)
+            group(ADMNutritionalInfos)
             {
                 Caption = 'Nutritional Infos';
-                field("total calories"; "total calories")
+                field("ADMtotal calories"; "ADMtotal calories")
                 {
                     ApplicationArea = All;
                     Caption = 'totalcalories';
+                    ToolTip = 'Specifies the value of the totalcalories field';
 
                     trigger OnAssistEdit()
                     var
@@ -27,7 +28,7 @@ pageextension 50000 "ADM PageExt50000" extends "Item Card"
                                 until ADMNutritionalInfo.Next() = 0;
                             Quantity := Quantity * (Rec."Net Weight" / 100);
 
-                            Rec."total calories" := Quantity;
+                            Rec."ADMtotal calories" := Quantity;
                             Rec.Modify();
                         end;
 
@@ -59,20 +60,21 @@ pageextension 50000 "ADM PageExt50000" extends "Item Card"
 
         addlast(navigation)
         {
-            group(NutritionalInfo)
+            group("ADMNutritionalInfo")
             {
                 Caption = 'Item Nutritional Infos';
-                action(Nutritional)
+                action("ADMNutritional")
                 {
                     ApplicationArea = All;
                     Caption = 'Show Nutritional Infos';
                     Image = RelatedInformation;
+                    ToolTip = 'Executes the Show Nutritional Infos action';
                     trigger OnAction()
                     var
+                        locitem: Record item;
                         ADMNutritionalInfo: Record "ADM Nutritional Info";
                         ADMNutritionalInfoPage: Page "ADM Nutritional Info";
                         TotCal: Decimal;
-                        locitem: Record item;
 
                     begin
                         ADMNutritionalInfo.setRange("Item No.", "No.");
@@ -88,7 +90,7 @@ pageextension 50000 "ADM PageExt50000" extends "Item Card"
                             until ADMNutritionalInfo.Next() = 0;
 
                         locitem.Get("No.");
-                        locitem."total calories" := TotCal;
+                        locitem."ADMtotal calories" := TotCal;
                         locitem.Modify();
 
 

@@ -18,6 +18,7 @@ page 50000 "ADM Nutritional Info"
                 {
                     ApplicationArea = All;
                     StyleExpr = tmpStyle;
+                    ToolTip = 'Specifies the value of the item No. field';
 
                 }
 
@@ -25,6 +26,7 @@ page 50000 "ADM Nutritional Info"
                 {
                     ApplicationArea = All;
                     StyleExpr = tmpStyle;
+                    ToolTip = 'Specifies the value of the item description field';
 
 
                 }
@@ -33,6 +35,7 @@ page 50000 "ADM Nutritional Info"
                 {
                     ApplicationArea = All;
                     StyleExpr = tmpStyle;
+                    ToolTip = 'Specifies the value of the item description field';
 
                 }
 
@@ -40,12 +43,14 @@ page 50000 "ADM Nutritional Info"
                 {
                     ApplicationArea = All;
                     StyleExpr = tmpStyle;
+                    ToolTip = 'Specifies the value of the Nutritional Information Type field';
 
                 }
                 field("Amount"; "Amount")
                 {
                     ApplicationArea = All;
                     StyleExpr = tmpStyle;
+                    ToolTip = 'Specifies the value of the Amount field';
 
                 }
 
@@ -59,21 +64,22 @@ page 50000 "ADM Nutritional Info"
         }
     }
 
-    actions
-    {
-        area(Processing)
-        {
-            action(ActionName)
-            {
-                ApplicationArea = All;
+    /*  actions
+      {
+          area(Processing)
+          {
+              action(ActionName)
+              {
+                  ApplicationArea = All;
+                  ToolTip = 'Executes the ActionName action';
 
-                trigger OnAction();
-                begin
+                  trigger OnAction();
+                  begin
 
-                end;
-            }
-        }
-    }
+                  end;
+              }
+          }
+      }*/
 
     trigger OnAfterGetRecord()
     begin

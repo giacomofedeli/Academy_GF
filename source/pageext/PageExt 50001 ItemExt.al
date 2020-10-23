@@ -9,7 +9,7 @@ pageextension 50001 "ADM PageExt50001" extends "Item List"
     {
         addlast(processing)
         {
-            action("Total Calories")
+            action("ADMTotal Calories")
             {
                 ApplicationArea = All;
                 Caption = 'Total Calories';
@@ -19,20 +19,20 @@ pageextension 50001 "ADM PageExt50001" extends "Item List"
 
                 trigger OnAction()
                 var
-                    totalcalories: Decimal;
                     Item: Record Item;
+                    totalcalories: Decimal;
                 begin
-                    if Item.CalcSums("total calories") then begin
+                    if Item.CalcSums("ADMtotal calories") then begin
 
 
-                        totalcalories := Rec."total calories";
+                        totalcalories := Rec."ADMtotal calories";
                         Message('The sum of calories for every item is %1', totalcalories);
                     end;
 
                 end;
 
             }
-            action("TotCal for  Items")
+            action("ADMTotCal for  Items")
             {
                 ApplicationArea = All;
                 Caption = 'Total Nutr infos';
@@ -42,44 +42,44 @@ pageextension 50001 "ADM PageExt50001" extends "Item List"
 
                 trigger OnAction()
                 var
-                    total: Decimal;
-                    NutrInfotemp: Record "ADM Nutritional Info" temporary;
+                    TempNutrInfo: Record "ADM Nutritional Info" temporary;
                     NutrInfo: Record "ADM Nutritional Info";
+                    total: Decimal;
                     EType: Enum "ADM Nutritional Info Type";
                 begin
                     NutrInfo.SetRange("Nutritional Type", EType::Proteins);
                     total := 0;
                     if NutrInfo.CalcSums("Amount") then
                         total := NutrInfo."Amount";
-                    NutrInfotemp.Init();
-                    NutrInfotemp.Amount := total;
-                    NutrInfotemp."Nutritional type" := EType::Proteins;
-                    NutrInfotemp."Item Description" := 'The sum of Proteins for every item';
-                    NutrInfotemp.Insert();
+                    TempNutrInfo.Init();
+                    TempNutrInfo.Amount := total;
+                    TempNutrInfo."Nutritional type" := EType::Proteins;
+                    TempNutrInfo."Item Description" := 'The sum of Proteins for every item';
+                    TempNutrInfo.Insert();
                     NutrInfo.Reset();
 
                     NutrInfo.SetRange("Nutritional Type", EType::fats);
                     total := 0;
                     if NutrInfo.CalcSums("Amount") then
                         total := NutrInfo."Amount";
-                    NutrInfotemp.Init();
-                    NutrInfotemp.Amount := total;
-                    NutrInfotemp."Nutritional type" := EType::fats;
-                    NutrInfotemp."Item Description" := 'The sum of Fats for every item';
-                    NutrInfotemp.Insert();
+                    TempNutrInfo.Init();
+                    TempNutrInfo.Amount := total;
+                    TempNutrInfo."Nutritional type" := EType::fats;
+                    TempNutrInfo."Item Description" := 'The sum of Fats for every item';
+                    TempNutrInfo.Insert();
                     NutrInfo.Reset();
 
                     NutrInfo.SetRange("Nutritional Type", EType::Sugars);
                     total := 0;
                     if NutrInfo.CalcSums("Amount") then
                         total := NutrInfo."Amount";
-                    NutrInfotemp.Init();
-                    NutrInfotemp.Amount := total;
-                    NutrInfotemp."Nutritional type" := EType::Sugars;
-                    NutrInfotemp."Item Description" := 'The sum of Sugars for every item';
-                    NutrInfotemp.Insert();
+                    TempNutrInfo.Init();
+                    TempNutrInfo.Amount := total;
+                    TempNutrInfo."Nutritional type" := EType::Sugars;
+                    TempNutrInfo."Item Description" := 'The sum of Sugars for every item';
+                    TempNutrInfo.Insert();
 
-                    page.RunModal(50001, NutrInfotemp);
+                    page.RunModal(50001, TempNutrInfo);
 
 
 
@@ -89,6 +89,4 @@ pageextension 50001 "ADM PageExt50001" extends "Item List"
 
         }
     }
-    var
-        myInt: Integer;
 }

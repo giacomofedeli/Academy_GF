@@ -7,15 +7,15 @@ table 50000 "ADM Nutritional Info"
     {
         field(1; "item No."; code[20])
         {
-            DataClassification = ToBeClassified;
+            DataClassification = CustomerContent;
             Caption = 'item No.';
             TableRelation = item."No.";
 
 
         }
-        field(20; "Item description"; text[50])
+        field(20; "Item description"; text[100])
         {
-            DataClassification = ToBeClassified;
+            DataClassification = CustomerContent;
             Caption = 'item description';
             trigger OnValidate()
             var
@@ -29,7 +29,7 @@ table 50000 "ADM Nutritional Info"
 
         }
 
-        field(30; "Item Description 2"; Text[50])
+        field(30; "Item Description 2"; Text[100])
         {
             //DataClassification = ToBeClassified;
             Caption = 'item Description 2';
@@ -40,11 +40,13 @@ table 50000 "ADM Nutritional Info"
 
         field(40; "Nutritional type"; Enum "ADM Nutritional Info Type")
         {
-            DataClassification = ToBeClassified;
+            DataClassification = CustomerContent;
+            Caption = 'Nutritional Information Type';
 
         }
         field(50; "Amount"; Decimal)
         {
+            DataClassification = CustomerContent;
             Caption = 'Amount';
 
         }
@@ -62,8 +64,9 @@ table 50000 "ADM Nutritional Info"
 
     trigger OnInsert()
     var
-        Total: Decimal;
         ADM: Record "ADM Nutritional Info";
+        Total: Decimal;
+
     begin
         ADM.SetRange("Item No.", Rec."item No.");
         Total := 0;
@@ -76,8 +79,8 @@ table 50000 "ADM Nutritional Info"
 
     trigger OnModify()
     var
-        Total: Decimal;
         ADM: Record "ADM Nutritional Info";
+        Total: Decimal;
     begin
         ADM.SetRange("Item No.", Rec."item No.");
         Total := 0;
